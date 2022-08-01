@@ -174,7 +174,7 @@ function listar_ordenes(){
 
  function buscarAro(){
   $("#aros_orden").modal("show");
-
+  let sucursal = $("#usuario").val(); console.log(sucursal)
   tabla_aros=$('#datatable_aros_ordenes').dataTable(
   {
     "aProcessing": true,//Activamos el procesamiento del datatables
@@ -188,7 +188,7 @@ function listar_ordenes(){
           url: '../ajax/productos.php?op=get_aros_orden',
           type : "post",
           dataType : "json",
-          //data:{estado:estado},
+          data:{sucursal:sucursal},
           error: function(e){
             console.log(e.responseText);
           }
@@ -251,25 +251,14 @@ function listar_ordenes(){
   //get_numero_orden();
 }
 
-function selectAro(id_aro){
+function selectAro(modelo,marca,medidas,color){
 
     $("#aros_orden").modal("hide");
-    $.ajax({
-      url:"../ajax/productos.php?op=buscar_data_aro",
-      method:"POST",
-      data:{id_aro:id_aro},
-      dataType:"json",
-      success:function(data){      
-        $("#modelo_aro_orden").val(data.modelo);       
-        $("#marca_aro_orden").val(data.marca);
-        $("#horizontal_aro_orden").val(data.horizontal);
-        $("#vertical_aro_orden").val(data.vertical);
-        $("#puente_aro_orden").val(data.puente);
-        $("#color_varilla").val(data.color_varillas);
-        $("#color_frente").val(data.color_frente);
-        $("#img_ord").val(data.img);
-      }
-    });//Fin Ajax
+     
+    $("#modelo_aro_orden").val(modelo);       
+    $("#marca_aro_orden").val(marca);
+
+
 }
 
 function listar_aros(){

@@ -68,16 +68,17 @@ switch ($_GET["op"]){
 
 	//////////////REPORTE INGRESOS BODEGA
     case "get_aros_orden":
-        $datos=$productos->get_aros();
+        $productos2 = new productosSucursal();
+        $datos=$productos2->get_aros_sucursal($_POST["sucursal"]);
         //Vamos a declarar un array
         $data= Array();
         foreach($datos as $row){
         $sub_array = array(); 
         $sub_array[] = $row["modelo"];
         $sub_array[] = $row["marca"];
-        $sub_array[] = $row["color_varillas"];
-        $sub_array[] = $row["color_frente"];
-        $sub_array[] = "<i class='fas fa-plus-circle fa-2x' onClick='selectAro(".$row["id_aro"].")'></i>";
+        $sub_array[] = $row["medidas"];
+        $sub_array[] = $row["color"];
+        $sub_array[] = '<i class="fas fa-plus-circle fa-2x" onClick="selectAro(\''.$row["modelo"].'\',\''.$row["marca"].'\',\''.$row["medidas"].'\',\''.$row["color"].'\')"></i>';
         $data[] = $sub_array;
     }
 

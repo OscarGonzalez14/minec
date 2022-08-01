@@ -31,4 +31,16 @@ class Conectar {
 
 }//cierre de llave conectar
 
+class Conexion2{
+	public $dbh;
+ 	public function conexion2(){
+ 	try {
+	    $conectar2 = $this->dbh = new PDO("mysql:local=localhost;dbname=avplus","root","");
+		return $conectar2;
+    }catch (Exception $e) {
+ 			print "¡Error!: " . $e->getMessage() . "<br/>";
+            die();
+ 	}
+	} //cierre de llave de la function conexion()
+}
 ?>

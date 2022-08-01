@@ -43,7 +43,7 @@ require_once("../config/conexion.php");
     barcode('../codigos/' . $codigo . '.png', $codigo, 50, 'horizontal', 'code128', true);
   }
   /////////////   REGISTRAR ORDEN ///////////////////////////////
-  public function registrar_orden($correlativo_op,$paciente,$fecha_creacion,$od_pupilar,$oipupilar,$odlente,$oilente,$marca_aro_orden,$modelo_aro_orden,$horizontal_aro_orden,$vertical_aro_orden,$puente_aro_orden,$id_usuario,$observaciones_orden,$dui,$od_esferas,$od_cilindros,$od_eje,$od_adicion,$oi_esferas,$oi_cilindros,$oi_eje,$oi_adicion,$tipo_lente,$color_varilla,$color_frente,$imagen,$edad,$usuario,$ocupacion,$avsc,$avfinal,$avsc_oi,$avfinal_oi,$telefono,$genero,$user,$depto,$municipio){
+  public function registrar_orden($correlativo_op,$paciente,$fecha_creacion,$od_pupilar,$oipupilar,$odlente,$oilente,$marca_aro_orden,$modelo_aro_orden,$horizontal_aro_orden,$vertical_aro_orden,$puente_aro_orden,$id_usuario,$observaciones_orden,$dui,$od_esferas,$od_cilindros,$od_eje,$od_adicion,$oi_esferas,$oi_cilindros,$oi_eje,$oi_adicion,$tipo_lente,$color_varilla,$color_frente,$imagen,$edad,$usuario,$ocupacion,$avsc,$avfinal,$avsc_oi,$avfinal_oi,$telefono,$genero,$user,$depto,$municipio,$antiref,$photochroma,$transit,$blueuv,$lente_man){
 
     $conectar = parent::conexion();
     date_default_timezone_set('America/El_Salvador'); 
@@ -53,7 +53,7 @@ require_once("../config/conexion.php");
     $laboratorio = "";
     $estado_aro = '0';
     $dest_aro = '0';
-    $sql = "insert into orden_lab values (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+    $sql = "insert into orden_lab values (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
     $sql = $conectar->prepare($sql);
     $sql->bindValue(1, $correlativo_op);
     $sql->bindValue(2, $paciente);
@@ -91,6 +91,11 @@ require_once("../config/conexion.php");
     $sql->bindValue(34, $genero);
     $sql->bindValue(35, $depto);
     $sql->bindValue(36, $municipio);
+    $sql->bindValue(37, $antiref);
+    $sql->bindValue(38, $photochroma);
+    $sql->bindValue(39, $transit);
+    $sql->bindValue(40, $blueuv);
+    $sql->bindValue(41, $lente_man);
     $sql->execute();
 
     $sql2 = "insert into rx_orden_lab value(null,?,?,?,?,?,?,?,?,?);";
@@ -119,7 +124,7 @@ require_once("../config/conexion.php");
 
   }
    ////////////////////LISTAR ORDENES///////////////
-public function editar_orden($correlativo_op,$paciente,$fecha_creacion,$od_pupilar,$oipupilar,$odlente,$oilente,$marca_aro_orden,$modelo_aro_orden,$horizontal_aro_orden,$vertical_aro_orden,$puente_aro_orden,$id_usuario,$observaciones_orden,$dui,$od_esferas,$od_cilindros,$od_eje,$od_adicion,$oi_esferas,$oi_cilindros,$oi_eje,$oi_adicion,$tipo_lente,$color_varilla,$color_frente,$categoria_lente,$imagen,$edad,$usuario,$ocupacion,$avsc,$avfinal,$avsc_oi,$avfinal_oi,$telefono,$genero,$depto,$municipio){
+public function editar_orden($correlativo_op,$paciente,$fecha_creacion,$od_pupilar,$oipupilar,$odlente,$oilente,$marca_aro_orden,$modelo_aro_orden,$horizontal_aro_orden,$vertical_aro_orden,$puente_aro_orden,$id_usuario,$observaciones_orden,$dui,$od_esferas,$od_cilindros,$od_eje,$od_adicion,$oi_esferas,$oi_cilindros,$oi_eje,$oi_adicion,$tipo_lente,$color_varilla,$color_frente,$categoria_lente,$imagen,$edad,$usuario,$ocupacion,$avsc,$avfinal,$avsc_oi,$avfinal_oi,$telefono,$genero,$depto,$municipio,$antiref,$photochroma,$transit,$blueuv,$lente_man){
   $conectar = parent::conexion();
   $edit_ord = "update orden_lab set
     paciente = ?,
@@ -149,9 +154,13 @@ public function editar_orden($correlativo_op,$paciente,$fecha_creacion,$od_pupil
     telefono = ?,
     genero = ?,
     depto=?,
-    municipio=?
+    municipio=?,
 
-
+    ar=?,
+    photo = ?,
+    transition = ?,
+    blueuv=?,
+    lente_man=?
 
     where codigo = ?;";
 
@@ -184,7 +193,14 @@ public function editar_orden($correlativo_op,$paciente,$fecha_creacion,$od_pupil
   $edit_ord->bindValue(26, $genero);
   $edit_ord->bindValue(27, $depto);
   $edit_ord->bindValue(28, $municipio);
-  $edit_ord->bindValue(29, $correlativo_op);
+  
+
+  $edit_ord->bindValue(29, $antiref);
+  $edit_ord->bindValue(30, $photochroma);
+  $edit_ord->bindValue(31, $transit);
+  $edit_ord->bindValue(32, $blueuv);
+  $edit_ord->bindValue(33, $lente_man);
+  $edit_ord->bindValue(34, $correlativo_op);
 
   $edit_ord->execute();
 
@@ -236,7 +252,7 @@ public function editar_orden($correlativo_op,$paciente,$fecha_creacion,$od_pupil
   public function get_data_orden($codigo,$paciente){
 
     $conectar = parent::conexion();
-    $sql = "select o.genero,o.telefono,o.laboratorio,o.categoria,o.codigo,o.paciente,o.fecha,o.pupilar_od,o.pupilar_oi,o.lente_od,o.lente_oi,o.marca_aro,o.modelo_aro,o.horizontal_aro,o.vertical_aro,o.puente_aro,o.usuario,o.observaciones,o.dui,o.estado,o.tipo_lente,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion,o.color_varilla,o.color_frente,o.img,o.dui,o.edad,o.usuario_lente,o.ocupacion,o.avsc,o.avfinal,o.avsc_oi,o.avfinal_oi,o.depto,o.municipio from
+    $sql = "select o.genero,o.telefono,o.laboratorio,o.categoria,o.codigo,o.paciente,o.fecha,o.pupilar_od,o.pupilar_oi,o.lente_od,o.lente_oi,o.marca_aro,o.modelo_aro,o.horizontal_aro,o.vertical_aro,o.puente_aro,o.usuario,o.observaciones,o.dui,o.estado,o.tipo_lente,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion,o.color_varilla,o.color_frente,o.img,o.dui,o.edad,o.usuario_lente,o.ocupacion,o.avsc,o.avfinal,o.avsc_oi,o.avfinal_oi,o.depto,o.municipio,o.ar,o.photo,o.transition,o.blueuv,o.lente_man from
       orden_lab as o inner join rx_orden_lab as rx on o.codigo=rx.codigo where o.codigo = ? and rx.codigo = ? and o.paciente=?;";
     $sql=$conectar->prepare($sql);
     $sql->bindValue(1,$codigo);

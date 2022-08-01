@@ -145,6 +145,15 @@ function guardar_orden(parametro='saveEdit'){
   let color_varilla = $("#color_varilla").val();
   let color_frente = $("#color_frente").val();
   let tipo_lente = $("input[type='radio'][name='tipo_lente']:checked").val();
+  let antir = $("input[type='checkbox'][name='antiR']:checked").val(); let antiref =''; antir==undefined ? antiref="No" : antiref="Si";
+
+  let photo = $("input[type='checkbox'][name='photo_op']:checked").val(); let photochroma =''; photo==undefined ? photochroma="No" : photochroma="Si";
+
+  let trans = $("input[type='checkbox'][name='trans-op']:checked").val(); let transit =''; trans==undefined ? transit="No" : transit="Si";
+
+  let blue = $("input[type='checkbox'][name='blueop']:checked").val(); let blueuv =''; blue==undefined ? blueuv="No" : blueuv="Si";
+
+  let lente_man = $("#lente_manual").val();
 
   if (tipo_lente===undefined) {
         Swal.fire({
@@ -224,7 +233,7 @@ function guardar_orden(parametro='saveEdit'){
     id_usuario:id_usuario,observaciones_orden:observaciones_orden,dui:dui,od_esferas:od_esferas,od_cilindros:od_cilindros,
     od_eje:od_eje,od_adicion:od_adicion,oi_esferas:oi_esferas,oi_cilindros:oi_cilindros,oi_eje:oi_eje,oi_adicion:oi_adicion,
     tipo_lente:tipo_lente,color_varilla:color_varilla,color_frente:color_frente,imagen:imagen,validate:validate,categoria_lente:categoria_lente,
-    edad:edad,usuario:usuario,ocupacion:ocupacion,avsc:avsc,avfinal:avfinal,avsc_oi:avsc_oi,avfinal_oi:avfinal_oi,telefono:telefono,genero:genero,user:user,depto:depto,municipio:municipio},
+    edad:edad,usuario:usuario,ocupacion:ocupacion,avsc:avsc,avfinal:avfinal,avsc_oi:avsc_oi,avfinal_oi:avfinal_oi,telefono:telefono,genero:genero,user:user,depto:depto,municipio:municipio,antiref:antiref,photochroma:photochroma,transit:transit,blueuv:blueuv,lente_man:lente_man},
     cache: false,
     dataType:"json",
    
@@ -314,7 +323,7 @@ function verEditar(codigo,paciente){
         data:{codigo:codigo,paciente:paciente},
         dataType:"json",
         success:function(data){
-  
+        console.log(data)
        $("#correlativo_op").html(data.codigo);
        $("#paciente").val(data.paciente);
        $("#dui_pac").val(data.dui);
@@ -358,10 +367,19 @@ function verEditar(codigo,paciente){
        let cadena = lente.replace(/ /g, "");
 
        document.getElementById(cadena).checked = true;
+       if(data.ar=="Si"){document.getElementById("arblack").checked = true;}else{document.getElementById("arblack").checked = false;}
 
-       let imagen = data.img;
+       if(data.photo=="Si"){document.getElementById("photoop").checked = true;}else{document.getElementById("photoop").checked = false;}
+
+       if(data.transition=="Si"){document.getElementById("transop").checked = true;}else{document.getElementById("transop").checked = false;}
+
+       if(data.blueuv=="Si"){document.getElementById("blueop").checked = true;}else{document.getElementById("blueop").checked = false;}
+
+       $("#lente_manual").val(data.lente_man);
+
+/*        let imagen = data.img;
        console.log(imagen);
-       document.getElementById("imagen_aro").src="images/"+imagen;
+       document.getElementById("imagen_aro").src="images/"+imagen; */
 
 
 
@@ -419,7 +437,10 @@ $(document).on('click', '#order_new', function(){
 
     document.getElementById("departamento_pac_data").innerHTML="";
     document.getElementById("munic_pac_data").innerHTML="";
-
+    document.getElementById("arblack").checked = false;
+    document.getElementById("photoop").checked = false;
+    document.getElementById("transop").checked = false;
+    document.getElementById("blueop").checked = false;
    let checkboxs = document.getElementsByClassName("chk_element");
        for(j=0;j<checkboxs.length;j++){
       let id_chk = checkboxs[j].id;
@@ -499,6 +520,8 @@ document.getElementById('observaciones_orden').classList.remove('is-invalid','is
 
  function get_numero_orden(){
   clear_form_orden();
+  let fecha = new Date();
+  document.getElementById("fecha_creacion").value = fecha.toJSON().slice(0,10);
  }
 
  function update_numero_orden(){

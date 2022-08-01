@@ -50,14 +50,14 @@ case 'registrar_orden':
     $datos = $ordenes->validar_correlativo_orden($nuevo_correlativo);
     if(is_array($token_validate) == true and count($token_validate)==0 and is_array($datos) and count($datos)==0){ 
         for ($x = 0; $x < 1; $x++) {      
-    $ordenes->registrar_orden($nuevo_correlativo,$_POST['paciente'],$_POST['fecha_creacion'],$_POST['od_pupilar'],$_POST['oipupilar'],$_POST["odlente"],$_POST["oilente"],$_POST['marca_aro_orden'],$_POST['modelo_aro_orden'],$_POST['horizontal_aro_orden'],$_POST['vertical_aro_orden'],$_POST['puente_aro_orden'],$_POST["id_usuario"],$_POST["observaciones_orden"],$_POST["dui"],$_POST["od_esferas"],$_POST["od_cilindros"],$_POST["od_eje"],$_POST["od_adicion"],$_POST["oi_esferas"],$_POST["oi_cilindros"],$_POST["oi_eje"],$_POST["oi_adicion"],$_POST["tipo_lente"],$_POST["color_varilla"],$_POST["color_frente"],$_POST["imagen"],$_POST["edad"],$_POST["usuario"],$_POST["ocupacion"],$_POST["avsc"],$_POST["avfinal"],$_POST["avsc_oi"],$_POST["avfinal_oi"],$_POST["telefono"],$_POST["genero"],$_POST["user"],$_POST["depto"],$_POST["municipio"]);
+    $ordenes->registrar_orden($nuevo_correlativo,$_POST['paciente'],$_POST['fecha_creacion'],$_POST['od_pupilar'],$_POST['oipupilar'],$_POST["odlente"],$_POST["oilente"],$_POST['marca_aro_orden'],$_POST['modelo_aro_orden'],$_POST['horizontal_aro_orden'],$_POST['vertical_aro_orden'],$_POST['puente_aro_orden'],$_POST["id_usuario"],$_POST["observaciones_orden"],$_POST["dui"],$_POST["od_esferas"],$_POST["od_cilindros"],$_POST["od_eje"],$_POST["od_adicion"],$_POST["oi_esferas"],$_POST["oi_cilindros"],$_POST["oi_eje"],$_POST["oi_adicion"],$_POST["tipo_lente"],$_POST["color_varilla"],$_POST["color_frente"],$_POST["imagen"],$_POST["edad"],$_POST["usuario"],$_POST["ocupacion"],$_POST["avsc"],$_POST["avfinal"],$_POST["avsc_oi"],$_POST["avfinal_oi"],$_POST["telefono"],$_POST["genero"],$_POST["user"],$_POST["depto"],$_POST["municipio"],$_POST["antiref"],$_POST["photochroma"],$_POST["transit"],$_POST["blueuv"],$_POST["lente_man"]);
     $mensaje='exito'; 
   }}else{
     $mensaje ="existe";
   }
 
-    }else{
-    $ordenes->editar_orden($_POST["correlativo_op"],$_POST["paciente"],$_POST["fecha_creacion"],$_POST["od_pupilar"],$_POST["oipupilar"],$_POST["odlente"],$_POST["oilente"],$_POST["marca_aro_orden"],$_POST["modelo_aro_orden"],$_POST["horizontal_aro_orden"],$_POST['vertical_aro_orden'],$_POST['puente_aro_orden'],$_POST["id_usuario"],$_POST["observaciones_orden"],$_POST["dui"],$_POST["od_esferas"],$_POST["od_cilindros"],$_POST["od_eje"],$_POST["od_adicion"],$_POST["oi_esferas"],$_POST["oi_cilindros"],$_POST["oi_eje"],$_POST["oi_adicion"],$_POST["tipo_lente"],$_POST["color_varilla"],$_POST["color_frente"],$_POST["categoria_lente"],$_POST["imagen"],$_POST["edad"],$_POST["usuario"],$_POST["ocupacion"],$_POST["avsc"],$_POST["avfinal"],$_POST["avsc_oi"],$_POST["avfinal_oi"],$_POST["telefono"],$_POST["genero"],$_POST["depto"],$_POST["municipio"]);
+  }else{
+    $ordenes->editar_orden($_POST["correlativo_op"],$_POST["paciente"],$_POST["fecha_creacion"],$_POST["od_pupilar"],$_POST["oipupilar"],$_POST["odlente"],$_POST["oilente"],$_POST["marca_aro_orden"],$_POST["modelo_aro_orden"],$_POST["horizontal_aro_orden"],$_POST['vertical_aro_orden'],$_POST['puente_aro_orden'],$_POST["id_usuario"],$_POST["observaciones_orden"],$_POST["dui"],$_POST["od_esferas"],$_POST["od_cilindros"],$_POST["od_eje"],$_POST["od_adicion"],$_POST["oi_esferas"],$_POST["oi_cilindros"],$_POST["oi_eje"],$_POST["oi_adicion"],$_POST["tipo_lente"],$_POST["color_varilla"],$_POST["color_frente"],$_POST["categoria_lente"],$_POST["imagen"],$_POST["edad"],$_POST["usuario"],$_POST["ocupacion"],$_POST["avsc"],$_POST["avfinal"],$_POST["avsc_oi"],$_POST["avfinal_oi"],$_POST["telefono"],$_POST["genero"],$_POST["depto"],$_POST["municipio"],$_POST["antiref"],$_POST["photochroma"],$_POST["transit"],$_POST["blueuv"],$_POST["lente_man"]);
     $mensaje="error";
   }
     echo json_encode($mensaje);
@@ -158,7 +158,7 @@ case 'get_ordenes_dig':
       $output["horizontal_aro"] = $row["horizontal_aro"];
       $output["vertical_aro"] = $row["vertical_aro"];
       $output["puente_aro"] = $row["puente_aro"];
-      $output["id_usuario"] = $row["id_usuario"];
+      $output["usuario"] = $row["usuario"];
       $output["observaciones"] = $row["observaciones"];
       $output["dui"] = $row["dui"];
       $output["estado"] = $row["estado"];        
@@ -186,7 +186,14 @@ case 'get_ordenes_dig':
       $output['telefono'] = $row['telefono'];
       $output['genero'] = $row['genero'];
       $output['depto'] = $row['depto'];
-      $output['municipio'] = $row['municipio'];       
+      $output['municipio'] = $row['municipio'];
+      
+      
+      $output['ar'] = $row['ar'];
+      $output['photo'] = $row['photo'];
+      $output['transition'] = $row['transition'];
+      $output['blueuv'] = $row['blueuv'];
+      $output['lente_man'] = $row['lente_man'];
     
       }
       

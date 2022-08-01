@@ -69,3 +69,18 @@
    	}
 
 }//Fin de la clase
+
+
+ class productosSucursal extends Conexion2{
+
+     public function get_aros_sucursal($sucursal){
+     $conectar=parent::conexion2();
+     //parent::set_names();
+
+     $sql="select e.id_producto,p.marca,p.modelo,p.color,p.medidas,p.diseno,p.materiales,e.stock from productos as p inner join existencias as e on p.id_producto=e.id_producto where e.bodega=? and e.stock > 0 and categoria_producto='aros' order by e.id_ingreso DESC;";
+     $sql= $conectar->prepare($sql);
+     $sql->bindValue(1, ucfirst($sucursal));
+     $sql->execute();
+     return $resultado=$sql->fetchAll();
+ }
+ }

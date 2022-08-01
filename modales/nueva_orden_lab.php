@@ -55,12 +55,12 @@
 
               <div class="col-sm-7">
                  <label for="" class="etiqueta">Ocupación</label>
-                <input type="text" class="form-control clear_orden_i oblig" id="ocupacion_pac">
+                <input type="text" class="form-control oblig" id="ocupacion_pac">
                </div>
 
               <div class="col-sm-3">
                  <label for="" class="etiqueta">Fecha exp.</label>
-                <input type="date" class="form-control clear_orden_i oblig" id="fecha_creacion">
+                <input type="date" class="form-control oblig" id="fecha_creacion">
               </div>
 
               <div class=" form-group col-sm-4 select2-purple">
@@ -87,7 +87,7 @@
 
 
             <div class=" form-group col-sm-5 select2-purple">
-              <label for="" class="etiqueta">Departamento </label> <span id="munic_pac_data" style="color: red"></span>
+              <label for="" class="etiqueta">Municipio </label> <span id="munic_pac_data" style="color: red"></span>
               <select class="select2 form-control clear_input" id="munic_pac" multiple="multiple" data-placeholder="Seleccionar Municipio" data-dropdown-css-class="select2-purple" style="width: 100%;height: ">
                 <option value="0">Seleccione Depto.</option>
               </select>               
@@ -95,29 +95,6 @@
 
              </div>
             <div class="eight"style="align-items: center">
-            <div >
-              <strong><h1 style="color:#034f84">TIPO LENTE</h1></strong>
-              <div class="row">
-                  <div class="col-sm-4" class="d-flex justify-content-center" style="display:flex;justify-content: center;margin-top:0px;">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input chk_element" type="radio" id="VisionSencilla" value="Visión Sencilla" name="tipo_lente">
-                      <label class="form-check-label" for="inlineCheckbox2" id="lentevs">Visión Sencilla</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-4" style="display:flex;justify-content: center;margin-top:0px;">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input chk_element" type="radio" id="Flaptop" value="Flaptop" name="tipo_lente">
-                      <label class="form-check-label" for="inlineCheckbox2" id="lentebf">Flaptop</label>
-                    </div>
-                  </div>
-                  <div class="col-sm-4" style="display:flex;justify-content: center;margin-top:0px;">
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input chl_element" type="radio" id="Progresive" value="Progresive" name="tipo_lente">
-                      <label class="form-check-label" for="inlineCheckbox2" id="lentemulti">Progresive</label>
-                    </div>
-                  </div>
-              </div>
-            </div>
             <!--################ RX final + medidas #############-->
             <div class="eight">
               <strong><h1 style="color: #034f84">GRADUACIÓN(Rx Final)</h1></strong>
@@ -297,7 +274,74 @@
           </div>
           </div>
 
+          
+
+
           </div><!--Fin Div Aros row-->
+
+
+       
+        <div class="row">
+          <div class="col-sm-6">
+          <div class="eight"style="align-items: center">
+            <strong><h1 style="color:#034f84">TIPO LENTE</h1></strong>
+            <div class="row">
+                <div class="col-sm-2" class="d-flex justify-content-center" style="display:flex;justify-content: center;margin-top:0px;">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input chk_element" type="radio" id="VisionSencilla" value="Visión Sencilla" name="tipo_lente">
+                    <label class="form-check-label" for="inlineCheckbox2" id="lentevs">VS</label>
+                  </div>
+                </div>
+                <div class="col-sm-2" style="display:flex;justify-content: center;margin-top:0px;">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input chk_element" type="radio" id="Flaptop" value="Flaptop" name="tipo_lente">
+                    <label class="form-check-label" for="inlineCheckbox2" id="lentebf">Ftop</label>
+                  </div>
+                </div>
+                <div class="col-sm-2" style="display:flex;justify-content: center;margin-top:0px;">
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input chl_element" type="radio" id="Progresive" value="Progresive" name="tipo_lente">
+                    <label class="form-check-label" for="inlineCheckbox2" id="lentemulti">Multi</label>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <input type="text" id="lente_manual" placeholder="Tipo Lente......" class="form-control clear_orden_i">
+                </div>
+            </div>
+            </div>
+          </div>
+          <div class="col-sm-1" style="font-size:13px"></div>
+          <div class="col-sm-5" style="font-size:13px">
+          <div class="eight"style="align-items: center">
+            <strong><h1 style="color:#034f84">Tratamientos</h1></strong>
+            <div class="row" style="text-align:center;">
+
+            <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-success col-sm-3">
+                <input type="checkbox" class="custom-control-input  checks check_clear" id="arblack" name='antiR'  style="background-color: gray !important; color: gray !important">
+                <label class="custom-control-label" for="arblack">AR</label>
+            </div>
+
+
+            <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-success col-sm-3">
+                <input type="checkbox" class="custom-control-input  checks check_clear" id="photoop" name='photo_op'  style="background-color: gray !important; color: gray !important">
+                <label class="custom-control-label" for="photoop">Photo</label>
+            </div>
+
+            <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-success col-sm-3">
+                <input type="checkbox" class="custom-control-input  checks check_clear" id="transop"  name='trans-op'  style="background-color: gray !important; color: gray !important">
+                <label class="custom-control-label" for="transop">Transitons</label>
+            </div>
+
+            <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-success col-sm-3">
+                <input type="checkbox" class="custom-control-input  checks check_clear" id="blueop"  name='blueop'  style="background-color: gray !important; color: gray !important">
+                <label class="custom-control-label" for="blueop">Blue UV</label>
+            </div>
+
+            </div>
+          </div>
+          </div>
+        </div>
          
           <div class="form-group col-sm-12">            
             <label for="" class="etiqueta">Observaciones</label>
