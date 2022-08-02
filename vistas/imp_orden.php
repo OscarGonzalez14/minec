@@ -58,46 +58,46 @@ echo '<table width="100%">';
     if($i % 2 == 0){
       echo "<tr>";
     }
-
-    echo"<td>";
+    foreach ($resultado as $key) {
+    echo "<td>";
      
     echo "<table class='table2' width='100%' style='margin-top;0px !important'>";
     echo "
      <tr>
-      <td colspan='30'>
+      <td colspan='25'>
         <img src='../dist/img/minec_transp.png' width='150' height='55'>
       </td>
-      <td colspan='40' style='text-align:left;'>";
-      echo $code; echo "Cod. ".$item;
+      <td colspan='50' style='text-align:left;'>";
+      echo date("d-m-Y",strtotime($key["fecha"]))."".$code; echo $item." - Id:<b>". $key["id_orden"]."</b>";
       echo "</td>
-      <td colspan='30' align='right' style='text-align:right'>
+      <td colspan='25' align='right' style='text-align:right'>
         <img src='../dist/img/logooficial.jpg' width='50' height='25'>
       </td>
      </tr>";
 
 
-     foreach ($resultado as $key) {
+
 
       echo "
       <tr>
-      <td class='stilot1' colspan='30' style='text-align:left'><span style='color:white'>123456669</span><b>ID: </b>".$key["id_orden"]."</td>
-      <td class='stilot1' colspan='35' style='text-align:left'><b>Lente:</b> ".$key["tipo_lente"]."</td>
-      <td class='stilot1' colspan='40' style='text-align:left'><b>Fecha</b> ".date("d-m-Y",strtotime($key["fecha"]))."</td>
+      <td class='stilot1' colspan='100' style='text-align:center;text-transform:uppercase'>".$key["tipo_lente"]." - ".$key["lente_man"]."</td>
+      </tr>
+      <tr>
+      <td class='stilot1' colspan='60' style='text-align:center;text-transform:uppercase'>".$key["usuario"]."</td>
+      <td class='stilot1' colspan='40' style='text-align:center;text-transform:uppercase'>".$key["laboratorio"]."</td>
       </tr>
       <tr style='height: 14px'>
-        <td class='stilot1 encabezado' colspan='65'><b style='padding: 0px'>Paciente:</b></td>
-        <td class='stilot1 encabezado' colspan='20'><b style='padding: 0px'>DUI</b></td>
+        <td class='stilot1 encabezado' colspan='60'><b style='padding: 0px'>Paciente:</b></td>
+        <td class='stilot1 encabezado' colspan='25'><b style='padding: 0px'>DUI</b></td>
         <td class='stilot1 encabezado' colspan='15'><b style='padding: 0px'>Edad:</b></td>
       </tr>
       <tr>
-        <td class='stilot1' colspan='65' style='text-transform:uppercase;font-size:10px'>".$key["paciente"]."</td>
-        <td class='stilot1' colspan='20'>".$key["dui"]."</td>
+        <td class='stilot1' colspan='60' style='text-transform:uppercase;font-size:10px'>".$key["paciente"]."</td>
+        <td class='stilot1' colspan='25'>".$key["dui"]."</td>
         <td class='stilot1' colspan='15'>".$key["edad"]."</td>
       </tr>
-      <tr>
-        <td colspan='100' class='stilot1 encabezado' style='text-align: center'><b>Rx final</b></td>
-      </tr>
-      <tr>
+
+      <tr class='encabezado'>
       <th style='text-align: center;' colspan='20' class='stilot1'><b>OJO</b></th>
         <th style='text-align: center;' colspan='20' class='stilot1'><b>Esfera</b></th>
         <th style='text-align: center;' colspan='20' class='stilot1'><b>Cilindro</b></th>
@@ -141,29 +141,34 @@ echo '<table width="100%">';
       <td colspan='20' class='stilot1'>".$key["avsc"]."</td>
       <td colspan='20' class='stilot1'>".$key["avfinal"]."</td>
     </tr>
-    <tr>
-      <td colspan='100' class='stilot1 encabezado'><b>ARO</b></td>
-    </tr>
-    
-    <tr>
-      <td colspan='15' class='stilot1'><b>Mod.</b></td>
-      <td colspan='30' class='stilot1'><b>Marca</b></td>
-      <td colspan='15' class='stilot1'><b>Horiz.</b></td>
-      <td colspan='20' class='stilot1'><b>Vertical</b></td>
-      <td colspan='20' class='stilot1'><b>Puente</b></td>
+  
+    <tr class='encabezado'>
+      <td colspan='15' class='stilot1'><b>Mod. aro</b></td>
+      <td colspan='25' class='stilot1'><b>Marca Aro</b></td>
+      <td colspan='15' class='stilot1'><b>AR.</b></td>
+      <td colspan='15' class='stilot1'><b>Photo</b></td>
+      <td colspan='15' class='stilot1'><b>Transit.</b></td>
+      <td colspan='15' class='stilot1'><b>Blueuv</b></td>
     </tr>
     <tr>
       <td colspan='15' class='stilot1'>".$key["modelo_aro"]."</td>
-      <td colspan='30' class='stilot1' style='font-size:10px'>".$key["marca_aro"]."</td>
-      <td colspan='15' class='stilot1'>".$key["horizontal_aro"]."</td>
-      <td colspan='20' class='stilot1'>".$key["vertical_aro"]."</td>
-      <td colspan='20' class='stilot1'>".$key["puente_aro"]."</td>
+      <td colspan='25' class='stilot1' style='font-size:9px'>".$key["marca_aro"]."</td>
+      <td colspan='15' class='stilot1'>".$key["ar"]."</td>
+      <td colspan='15' class='stilot1'>".$key["photo"]."</td>
+      <td colspan='15' class='stilot1'>".$key["transition"]."</td>
+      <td colspan='15' class='stilot1'>".$key["blueuv"]."</td>
     </tr>
+    <tr>
+      <td colspan='100' class='stilot1' style='text-align:left;padding:2px'>".$key["observaciones"]."</td>
+    </tr>
+    </tr>
+
+
       ";
     }
   
 
-    echo "</table><br>--------------------------------------------------------------------------";
+    echo "</table><br>";
     
     echo "</td>";
 

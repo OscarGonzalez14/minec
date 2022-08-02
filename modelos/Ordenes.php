@@ -354,9 +354,9 @@ public function ordenEnviarFechaLente($inicio,$fin,$lente,$usuario){
 
   public function getOrdenesPorLab($laboratorio,$usuario){
     $conectar = parent::conexion();
-    $sql = "select o.id_orden,o.codigo,o.paciente,o.fecha,o.pupilar_od,o.pupilar_oi,o.lente_od,o.lente_oi,o.marca_aro,o.modelo_aro,o.horizontal_aro,o.vertical_aro,o.puente_aro,o.usuario,o.observaciones,o.dui,o.estado,o.tipo_lente,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion
+    $sql = "select o.categoria,o.laboratorio,o.id_orden,o.codigo,o.paciente,o.fecha,o.pupilar_od,o.pupilar_oi,o.lente_od,o.lente_oi,o.marca_aro,o.modelo_aro,o.horizontal_aro,o.vertical_aro,o.puente_aro,o.usuario,o.observaciones,o.dui,o.estado,o.tipo_lente,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion
     from
-    orden_lab as o inner join rx_orden_lab as rx on o.codigo=rx.codigo where o.estado='1' and usuario=? and o.labotatorio=? order by o.fecha ASC;";
+    orden_lab as o inner join rx_orden_lab as rx on o.codigo=rx.codigo where o.estado='1' and usuario=? and o.laboratorio=? order by o.fecha ASC;";
     $sql=$conectar->prepare($sql);
     $sql->bindValue(1,$usuario);
     $sql->bindValue(2,$laboratorio);

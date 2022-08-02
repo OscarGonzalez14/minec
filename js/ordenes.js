@@ -847,8 +847,7 @@ function get_ordenes_env(laboratorio){
   }
 
   let usuario = $("#usuario").val();
-  console.log("850"+usuario)
-
+ 
   table_env = $('#data_ordenes_env').DataTable({      
     "aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
