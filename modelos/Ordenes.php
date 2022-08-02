@@ -352,6 +352,19 @@ public function ordenEnviarFechaLente($inicio,$fin,$lente,$usuario){
       return $resulta = $sql->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  public function getOrdenesPorLab($laboratorio,$usuario){
+    $conectar = parent::conexion();
+    $sql = "select o.id_orden,o.codigo,o.paciente,o.fecha,o.pupilar_od,o.pupilar_oi,o.lente_od,o.lente_oi,o.marca_aro,o.modelo_aro,o.horizontal_aro,o.vertical_aro,o.puente_aro,o.usuario,o.observaciones,o.dui,o.estado,o.tipo_lente,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion
+    from
+    orden_lab as o inner join rx_orden_lab as rx on o.codigo=rx.codigo where o.estado='1' and usuario=? and o.labotatorio=? order by o.fecha ASC;";
+    $sql=$conectar->prepare($sql);
+    $sql->bindValue(1,$usuario);
+    $sql->bindValue(2,$laboratorio);
+    $sql->execute();
+
+    return $resulta = $sql->fetchAll(PDO::FETCH_ASSOC);
+}
+
   public function get_ordenes_env($laboratorio,$cat_lente,$inicio,$fin,$tipo_lente){
     $conectar = parent::conexion();
     $sql = "select o.modelo_aro,o.id_orden,o.codigo,o.paciente,o.laboratorio,o.categoria,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion,o.id_orden,o.tipo_lente,a.fecha,a.observaciones,o.fecha from rx_orden_lab as rx INNER JOIN orden_lab as o on rx.codigo=o.codigo INNER JOIN acciones_orden as a on o.codigo=a.codigo WHERE o.tipo_lente=? and a.tipo_accion='Envio' and o.estado='1' and o.laboratorio=? and o.categoria=? and o.fecha between ? and ? group by o.id_orden order by o.fecha ASC;";
@@ -409,32 +422,35 @@ public function ordenEnviarFechaLente($inicio,$fin,$lente,$usuario){
   }
 
 
-  public function get_ordenes_env_general(){
+  public function get_ordenes_env_general($usuario){
     $conectar = parent::conexion();
-    $sql = "select o.modelo_aro,o.id_orden,o.codigo,o.paciente,o.laboratorio,o.categoria,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion,o.id_orden,o.tipo_lente,o.fecha,a.observaciones from rx_orden_lab as rx INNER JOIN orden_lab as o on rx.codigo=o.codigo INNER JOIN acciones_orden as a on o.codigo=a.codigo WHERE a.tipo_accion='Envio' and o.estado='1' group by o.id_orden order by a.id_accion desc";
+    $sql = "select o.modelo_aro,o.id_orden,o.codigo,o.paciente,o.laboratorio,o.categoria,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion,o.id_orden,o.tipo_lente,o.fecha,a.observaciones from rx_orden_lab as rx INNER JOIN orden_lab as o on rx.codigo=o.codigo INNER JOIN acciones_orden as a on o.codigo=a.codigo WHERE a.tipo_accion='Envio' and o.estado='1' and o.usuario=? group by o.id_orden order by a.id_accion desc";
     $sql=$conectar->prepare($sql);
+    $sql->bindValue(1,$usuario);
     $sql->execute();
     return $resulta = $sql->fetchAll(PDO::FETCH_ASSOC);
   }
 
   ////////////////LENTES ENVIADOS LABORATORIO
-    public function getOrdenesEnviadasLab($laboratorio,$cat_lente,$inicio,$fin,$tipo_lente){
+    public function getOrdenesEnviadasLab($laboratorio,$cat_lente,$inicio,$fin,$tipo_lente,$usuario){
     $conectar = parent::conexion();
-    $sql = "select o.estado,o.id_orden,o.codigo,o.paciente,o.laboratorio,o.categoria,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion,o.id_orden,o.tipo_lente,o.fecha from rx_orden_lab as rx INNER JOIN orden_lab as o on rx.codigo=o.codigo WHERE (o.estado='2' or o.estado='3') and o.tipo_lente=? and o.laboratorio=? and o.categoria=? and o.fecha between ? and ? order by o.fecha ASC;";
+    $sql = "select o.estado,o.id_orden,o.codigo,o.paciente,o.laboratorio,o.categoria,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion,o.id_orden,o.tipo_lente,o.fecha from rx_orden_lab as rx INNER JOIN orden_lab as o on rx.codigo=o.codigo WHERE (o.estado='2' or o.estado='3') and o.tipo_lente=? and o.laboratorio=? and o.categoria=? and o.fecha between ? and ? and usuario=? order by o.fecha ASC;";
     $sql=$conectar->prepare($sql);
     $sql->bindValue(1,$tipo_lente);
     $sql->bindValue(2,$laboratorio);
     $sql->bindValue(3,$cat_lente);
     $sql->bindValue(4,$inicio);
     $sql->bindValue(5,$fin);
+    $sql->bindValue(6,$usuario);
     $sql->execute();
     return $resulta = $sql->fetchAll(PDO::FETCH_ASSOC);
   }
   
-  public function getEnviosGeneral(){
+  public function getEnviosGeneral($usuario){
     $conectar = parent::conexion();
-    $sql = "select o.estado,o.id_orden,o.codigo,o.paciente,o.laboratorio,o.categoria,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion,o.id_orden,o.tipo_lente,o.fecha from rx_orden_lab as rx INNER JOIN orden_lab as o on rx.codigo=o.codigo  WHERE o.estado='2' or o.estado='3' order by o.fecha DESC;";
+    $sql = "select o.estado,o.id_orden,o.codigo,o.paciente,o.laboratorio,o.categoria,rx.od_esferas,rx.od_cilindros,rx.od_eje,rx.od_adicion,rx.oi_esferas,rx.oi_cilindros,rx.oi_eje,rx.oi_adicion,o.id_orden,o.tipo_lente,o.fecha from rx_orden_lab as rx INNER JOIN orden_lab as o on rx.codigo=o.codigo  WHERE o.estado='2' or o.estado='3' and usuario=? order by o.fecha DESC;";
     $sql=$conectar->prepare($sql);
+    $sql->bindValue(1,$usuario);
     $sql->execute();
     return $resulta = $sql->fetchAll(PDO::FETCH_ASSOC);
 

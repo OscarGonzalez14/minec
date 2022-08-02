@@ -350,8 +350,11 @@ case 'listar_ordenes_enviar':
   elseif($_POST["inicio"] != "0" and $_POST["hasta"] != "0" and $_POST["cat_lente"] !="0" and $_POST["tipo_lente"] !="0"){
     $datos = $ordenes->get_ordenes_env($_POST["laboratorio"],$_POST["cat_lente"],$_POST["inicio"],$_POST["hasta"],$_POST["tipo_lente"]);
   }
+  elseif($_POST["inicio"] == "0" and $_POST["hasta"] == "0" and $_POST["cat_lente"] =="0" and $_POST["tipo_lente"] =="0"){
+    $datos = $ordenes->getOrdenesPorLab($_POST['laboratorio'],$_POST["usuario"]);
+  }
   else{
-    $datos = $ordenes->get_ordenes_env_general();
+    $datos = $ordenes->get_ordenes_env_general($_POST["usuario"]);
   }
   $data = Array();
   $tit = "Recibir";
@@ -395,9 +398,9 @@ case 'listar_ordenes_enviar':
   ////////////////////////LISTAR ORDENES ENVIADAS A LABORATORIO
   case 'get_ordenes_enviadas_lab':
   if($_POST["laboratorio"] !='0'){
-   $datos = $ordenes->getOrdenesEnviadasLab($_POST["laboratorio"],$_POST["cat_lente"],$_POST["inicio"],$_POST["hasta"],$_POST["tipo_lente"]);
+   $datos = $ordenes->getOrdenesEnviadasLab($_POST["laboratorio"],$_POST["cat_lente"],$_POST["inicio"],$_POST["hasta"],$_POST["tipo_lente"],$_POST["usuario"]);
     }else{
-     $datos = $ordenes->getEnviosGeneral();
+     $datos = $ordenes->getEnviosGeneral($_POST["usuario"]);
     }
   $data = Array();
   $tit = "Recibir";

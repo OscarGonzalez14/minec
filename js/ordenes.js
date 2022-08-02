@@ -846,6 +846,9 @@ function get_ordenes_env(laboratorio){
     hasta = '0';
   }
 
+  let usuario = $("#usuario").val();
+  console.log("850"+usuario)
+
   table_env = $('#data_ordenes_env').DataTable({      
     "aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -855,7 +858,7 @@ function get_ordenes_env(laboratorio){
       url:"../ajax/ordenes.php?op=get_ordenes_env",
       type : "POST",
       //dataType : "json",
-      data : {laboratorio:laboratorio,cat_lente:cat_lente,inicio:inicio,hasta:hasta,tipo_lente:tipo_lente},
+      data : {laboratorio:laboratorio,cat_lente:cat_lente,inicio:inicio,hasta:hasta,tipo_lente:tipo_lente,usuario:usuario},
       error: function(e){
       console.log(e.responseText);
     },},
@@ -895,6 +898,7 @@ function get_ordenes_env_lab(laboratorio){
   let hasta =$("#hasta_table_send").val();
   let cat_lente =$("#cat_lente_send").val();
   let tipo_lente = $("#tipo_lente_env").val();
+  let usuario = $("#usuario").val();
 
   table_env = $('#data_ordenes_env_laboratorio').DataTable({      
     "aProcessing": true,//Activamos el procesamiento del datatables
@@ -905,7 +909,7 @@ function get_ordenes_env_lab(laboratorio){
       url:"../ajax/ordenes.php?op=get_ordenes_enviadas_lab",
       type : "POST",
       //dataType : "json",
-      data : {laboratorio:laboratorio,cat_lente:cat_lente,inicio:inicio,hasta:hasta,tipo_lente:tipo_lente},
+      data : {laboratorio:laboratorio,cat_lente:cat_lente,inicio:inicio,hasta:hasta,tipo_lente:tipo_lente,usuario:usuario},
       error: function(e){
       console.log(e.responseText);
     },},
