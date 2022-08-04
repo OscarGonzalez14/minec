@@ -272,15 +272,8 @@
               </div>
             </div>
           </div>
-          </div>
-
-          
-
-
-          </div><!--Fin Div Aros row-->
-
-
-       
+          </div> 
+          </div><!--Fin Div Aros row-->      
         <div class="row">
           <div class="col-sm-6">
           <div class="eight"style="align-items: center">
@@ -342,11 +335,17 @@
           </div>
           </div>
         </div>
-         
-          <div class="form-group col-sm-12">            
+         <div class="form-row">
+         <div class="col-sm-10 form-group">            
             <label for="" class="etiqueta">Observaciones</label>
             <input type="text" class="form-control clear_orden_i oblig" id="observaciones_orden">
           </div>
+
+          <div class="col-sm-2 form-group">            
+             <button type="button" class="btn btn-success btn-primary" style="margin-top: 30px;" id="agregarServicio" data-toggle="modal" data-target="#ingresosExtra" data-index-number="12314Os"><i class="fas fa-file-invoice-dollar"></i> &nbsp;Servicios extra</button>
+          </div>
+         </div>
+         <span style="color:blue"><b>Servicios extra: </b></span> <b>Monto $</b><span id="montoAdd"></span>&nbsp;&nbsp; <b>Desc.: </b><span id="descAdd"></span>
 
           <p id="created"></p>
 

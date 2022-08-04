@@ -222,7 +222,8 @@ function guardar_orden(parametro='saveEdit'){
   if (correlativo_op !="") {
     $("#nueva_orden_lab").modal('hide');
   }
-
+  let montoAdd = $("#cantidad_extra").val();
+  let descAdd = $("#conceptoExtra").val();
   $("#nueva_orden_lab").modal('hide');
   $.ajax({
     url:"../ajax/ordenes.php?op=registrar_orden",
@@ -1721,6 +1722,24 @@ function get_municipios(depto){
 
 }
 
+function agregarServicio(){
+  let monto_extra = document.getElementById("cantidad_extra").value;
+  let descripcion_extra = document.getElementById("conceptoExtra").value;
+  if(monto_extra=="" || descripcion_extra==""){
+    Swal.fire({
+      position: 'top-center',
+      icon: 'error',
+      title: 'Existen campos vacios',
+      showConfirmButton: true,
+      timer: 2500
+    });
+  }
+  $("#ingresosExtra").modal("hide");
+  document.getElementById("montoAdd").innerHTML = monto_extra;
+  document.getElementById("descAdd").innerHTML = descripcion_extra;
+
+
+}
 
 init();
 

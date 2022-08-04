@@ -104,6 +104,35 @@ $categoria_usuario = $_SESSION["categoria"];
       </div>
     </div>
   </div>
+  
+  <div class="modal fade" id="ingresosExtra" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="max-width:65%">
+    <div class="modal-content">
+      <div class="modal-header bg-info" style="font-size:18px;padding:5px">
+        <h5 class="modal-title" id="exampleModalLabel" >Servicios extras</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-2">
+            <label for="">Monto</label>
+          <input type="number" class="form-control clear_orden_i" id="cantidad_extra" >
+          </div>
+          <div class="col-sm-10">
+            <label for="">Descripción</label>
+            <input class="form-control clear_orden_i" type="text" id="conceptoExtra" placeholder="Descripcion servicio extra">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-block" onClick="agregarServicio()">Agregar servicio</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <strong>2021 Lenti || <b>Version</b> 1.0</strong>
