@@ -129,6 +129,7 @@ $categoria_usuario = $_SESSION["categoria"];
        <table width="100%" class="table-bordered" id="data_ordenes_env"  data-order='[[ 1, "ASC" ]]' style="font-size: 10px">        
          <thead class="style_th bg-primary" style="color: white">
            <th>ID</th>
+           <th>Sucursal</th>
            <th>Fecha</th>
            <th><label><input type="checkbox" id="select-all-env" class="form-check-label" onClick="selectOrdenesImprimir()"> Seleccionar</label></th>
            <th>Paciente</th>
@@ -137,7 +138,6 @@ $categoria_usuario = $_SESSION["categoria"];
            <th>Lente</th>
            <th>Categoria</th>
            <th>Lab.</th>
-           <th>Aro.</th>
            <th>Ver</th>
            <th>Edit</th>
          </thead>

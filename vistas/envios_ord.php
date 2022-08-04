@@ -76,6 +76,7 @@ $categoria_usuario = $_SESSION["categoria"];
       </ul>        
         <thead class="style_th bg-info" style="color: white">
            <th>ID</th>
+           <th>Sucursal</th>
            <th>Fecha</th>
            <th>Clasificar</th>
            <th>Paciente</th>

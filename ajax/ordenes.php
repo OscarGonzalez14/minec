@@ -115,13 +115,14 @@ case 'get_ordenes_dig':
   if ($_POST["filter"] == 1) {
     $datos = $ordenes->get_ordenes_filter_date($_POST["inicio"],$_POST["hasta"],$_POST["usuario"]);
   }elseif($_POST["filter"]==0){
-    $datos = $ordenes->get_ordenes($_POST["usuario"]);
+    $datos = $ordenes->get_ordenes($_POST["usuario"],$_POST["categoriaUsuario"]);
   }
 
   foreach ($datos as $row) { 
   $sub_array = array();
 
   $sub_array[] = $row["id_orden"];  
+  $sub_array[] = ucfirst($row["usuario"]); 
   $sub_array[] = date("d-m-Y",strtotime($row["fecha"]));
   $sub_array[] = strtoupper($row["paciente"]);
   $sub_array[] = $row["dui"];
@@ -285,7 +286,7 @@ case 'listar_ordenes_enviar':
     case 'get_ordenes_por_enviar':
 
   if($_POST["inicio"] == "0" and $_POST["hasta"] =="0" and $_POST["lente"]=="0"){
-    $datos = $ordenes->get_ordenes_enviar_general($_POST['usuario']);
+    $datos = $ordenes->get_ordenes_enviar_general($_POST['usuario'],$_POST["categoriaUsuario"]);
   }elseif($_POST["inicio"] != "0" and $_POST["hasta"] !="0" and $_POST["lente"]=="0"){
     $datos = $ordenes->get_ordenes_por_enviar($_POST["inicio"],$_POST["hasta"],$_POST['usuario']);
   }elseif($_POST["inicio"] != "0" and $_POST["hasta"] !="0" and $_POST["lente"] !="0"){
@@ -309,7 +310,8 @@ case 'listar_ordenes_enviar':
         $oi_add = ($row["oi_adicion"]=="-" or $row["oi_adicion"]=="")? '': "<span style='color:blue'>Add. </span>".$row["oi_adicion"];
         ///////////////////////////   
         $sub_array = array();
-        $sub_array[] = $row["id_orden"]; 
+        $sub_array[] = $row["id_orden"];
+        $sub_array[] = ucfirst($row["usuario"]); 
         $sub_array[] = date("d-m-Y",strtotime($row["fecha"]));       
         $sub_array[] = '<div style="text-align:center"><input type="checkbox" class="form-check-input ordenes_enviar" value="'.$row["id_orden"].'" name="'.$row["paciente"].'" id="'.$row["codigo"].'" style="text-align: center"><span style="color:white">.</span></div>';
         $sub_array[] = "<span style='font-size:11px'>".strtoupper($row["paciente"])."</span>";
@@ -330,11 +332,7 @@ case 'listar_ordenes_enviar':
   break;
     ///////////////////////////////LISTAR ORDENES ENVIADAS LENTES///////////////
   case 'get_ordenes_env':
-  /*if($_POST["laboratorio"] !='0'){
-  $datos = $ordenes->get_ordenes_env($_POST["laboratorio"],$_POST["cat_lente"],$_POST["inicio"],$_POST["hasta"],$_POST["tipo_lente"]);
-  }else{
-     $datos = $ordenes->get_ordenes_env_general();
-  }*/
+
   if($_POST["cat_lente"] !="0" and $_POST["inicio"]=="0" and $_POST["hasta"]=="0" and $_POST["tipo_lente"]=="0"){
     $datos = $ordenes->getOrdenesEnvBase($_POST['laboratorio'],$_POST["cat_lente"]);
   }
@@ -351,7 +349,7 @@ case 'listar_ordenes_enviar':
     $datos = $ordenes->get_ordenes_env($_POST["laboratorio"],$_POST["cat_lente"],$_POST["inicio"],$_POST["hasta"],$_POST["tipo_lente"]);
   }
   elseif($_POST["inicio"] == "0" and $_POST["hasta"] == "0" and $_POST["cat_lente"] =="0" and $_POST["tipo_lente"] =="0"){
-    $datos = $ordenes->getOrdenesPorLab($_POST['laboratorio'],$_POST["usuario"]);
+    $datos = $ordenes->getOrdenesPorLab($_POST['laboratorio'],$_POST["usuario"],$_POST["categoriaUsuario"]);
   }
   else{
     $datos = $ordenes->get_ordenes_env_general($_POST["usuario"]);
@@ -373,6 +371,7 @@ case 'listar_ordenes_enviar':
         ///////////////////////////   
         $sub_array = array();
         $sub_array[] = $row["id_orden"];
+        $sub_array[] = $row["usuario"];
         $sub_array[] = date("d-m-Y",strtotime($row["fecha"]));   
         $sub_array[] = '<div data-toggle="tooltip" title="Fecha envío: '.$row["fecha"].'" style="text-align:center"><input type="checkbox" class="form-check-input ordenes_enviar" value="'.$row["id_orden"].'" name="'.$row["paciente"].'" id="'.$row["codigo"].'" style="text-align: center"><span style="color:white">.</span></div>';
         $sub_array[] = "<span style='font-size:11px' data-toggle='tooltip' title='Fecha envío: ".$row["fecha"]."'>".strtoupper($row["paciente"])."</span>";
@@ -381,7 +380,6 @@ case 'listar_ordenes_enviar':
         $sub_array[] = $row["tipo_lente"];
         $sub_array[] = $row["categoria"];
         $sub_array[] = $row["laboratorio"];
-        $sub_array[] = $row["modelo_aro"];
         $sub_array[] = '<div style="text-align:center"><button type="button"  class="btn btn-sm bg-light show_panel_admin" onClick="verEditar(\''.$row["codigo"].'\',\''.$row["paciente"].'\')"><i class="fa fa-eye" aria-hidden="true" style="color:blue"></i></button></div>';
         $sub_array[] = '<i class="fas fa-edit" aria-hidden="true" style="color:green" onClick="editaLaboratorio(\''.$row["paciente"].'\',\''.$row["categoria"].'\',\''.$row["laboratorio"].'\',\''.$row["codigo"].'\')"></i></button>';     
        $data[] = $sub_array;

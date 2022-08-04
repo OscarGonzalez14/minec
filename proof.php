@@ -1,4 +1,5 @@
 <?php
-$list = ["a","B","C"];
-
-echo array_is_list($list);
+$categoriaUsuario="1";
+$usuario="MeAndtro";
+$sucursal = $categoriaUsuario =="1" ? "" : $usuario; 
+echo $sucursal;

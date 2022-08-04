@@ -542,7 +542,8 @@ function listar_ordenes_digitadas(filter){
   let inicio = $("#desde_orders").val();
   let hasta = $("#hasta_orders").val();
   let usuario = $("#usuario").val();
-  console.log(usuario)
+  let categoriaUsuario = $("#get_categoria").val();
+  console.log(categoriaUsuario);
   tabla_ordenes= $('#datatable_ordenes').DataTable({      
     "aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -554,7 +555,7 @@ function listar_ordenes_digitadas(filter){
     "ajax":{
       url:"../ajax/ordenes.php?op=get_ordenes_dig",
       type : "POST",
-      data:{inicio:inicio,hasta:hasta,filter:filter,usuario:usuario},           
+      data:{inicio:inicio,hasta:hasta,filter:filter,usuario:usuario,categoriaUsuario:categoriaUsuario},           
       error: function(e){
       console.log(e.responseText);
     },           
@@ -788,8 +789,8 @@ function get_ordenes_por_enviar(){
   }
 
   let lente = $("#tipo_lente_pendiente").val();
+  let categoriaUsuario =  document.getElementById("get_categoria").value;
 
-  //console.log(`inicio ${inicio} hasta ${hasta} lente ${lente}`);return false;
   table_enviados = $('#data_ordenes_sin_procesar').DataTable({      
     "aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -798,7 +799,7 @@ function get_ordenes_por_enviar(){
     "ajax":{
       url:"../ajax/ordenes.php?op=get_ordenes_por_enviar",
       type : "POST",
-      data :{inicio:inicio,hasta:hasta,lente:lente,usuario:usuario},
+      data :{inicio:inicio,hasta:hasta,lente:lente,usuario:usuario,categoriaUsuario:categoriaUsuario},
       dataType : "json",
       error: function(e){
       console.log(e.responseText);
@@ -847,6 +848,7 @@ function get_ordenes_env(laboratorio){
   }
 
   let usuario = $("#usuario").val();
+  let categoriaUsuario = document.getElementById("get_categoria").value;
  
   table_env = $('#data_ordenes_env').DataTable({      
     "aProcessing": true,//Activamos el procesamiento del datatables
@@ -857,7 +859,7 @@ function get_ordenes_env(laboratorio){
       url:"../ajax/ordenes.php?op=get_ordenes_env",
       type : "POST",
       //dataType : "json",
-      data : {laboratorio:laboratorio,cat_lente:cat_lente,inicio:inicio,hasta:hasta,tipo_lente:tipo_lente,usuario:usuario},
+      data : {laboratorio:laboratorio,cat_lente:cat_lente,inicio:inicio,hasta:hasta,tipo_lente:tipo_lente,usuario:usuario,categoriaUsuario:categoriaUsuario},
       error: function(e){
       console.log(e.responseText);
     },},

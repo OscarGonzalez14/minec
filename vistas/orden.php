@@ -64,6 +64,7 @@ $categoria_usuario = $_SESSION["categoria"];
        <table width="100%" class="table-hover table-bordered" id="datatable_ordenes"  data-order='[[ 0, "desc" ]]'>    
          <thead class="style_th" style="color: white;background:#313945">
            <th>ID</th>
+           <th>Sucursal</th>
            <th>Fecha</th>
            <th>Paciente</th>
            <th>DUI</th>
