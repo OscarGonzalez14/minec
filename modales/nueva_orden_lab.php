@@ -310,13 +310,13 @@
             <strong><h1 style="color:#034f84">Tratamientos</h1></strong>
             <div class="row" style="text-align:center;">
 
-            <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-success col-sm-3">
+            <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-success col-sm-2">
                 <input type="checkbox" class="custom-control-input  checks check_clear" id="arblack" name='antiR'  style="background-color: gray !important; color: gray !important">
                 <label class="custom-control-label" for="arblack">AR</label>
             </div>
 
 
-            <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-success col-sm-3">
+            <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-success col-sm-2">
                 <input type="checkbox" class="custom-control-input  checks check_clear" id="photoop" name='photo_op'  style="background-color: gray !important; color: gray !important">
                 <label class="custom-control-label" for="photoop">Photo</label>
             </div>
@@ -329,6 +329,12 @@
             <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-success col-sm-3">
                 <input type="checkbox" class="custom-control-input  checks check_clear" id="blueop"  name='blueop'  style="background-color: gray !important; color: gray !important">
                 <label class="custom-control-label" for="blueop">Blue UV</label>
+            </div>
+
+
+            <div class="custom-control custom-switch custom-switch-off-light custom-switch-on-success col-sm-2">
+                <input type="checkbox" class="custom-control-input  checks check_clear" id="pgx"  name='pgx'  style="background-color: gray !important; color: gray !important">
+                <label class="custom-control-label" for="pgx">PGX</label>
             </div>
 
             </div>

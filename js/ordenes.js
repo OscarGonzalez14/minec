@@ -153,6 +153,8 @@ function guardar_orden(parametro='saveEdit'){
 
   let blue = $("input[type='checkbox'][name='blueop']:checked").val(); let blueuv =''; blue==undefined ? blueuv="No" : blueuv="Si";
 
+  let vdriopgx = $("input[type='checkbox'][name='pgx']:checked").val(); let pgx =''; vdriopgx==undefined ? pgx="No" : pgx="Si";
+
   let lente_man = $("#lente_manual").val();
 
   if (tipo_lente===undefined) {
@@ -234,7 +236,7 @@ function guardar_orden(parametro='saveEdit'){
     id_usuario:id_usuario,observaciones_orden:observaciones_orden,dui:dui,od_esferas:od_esferas,od_cilindros:od_cilindros,
     od_eje:od_eje,od_adicion:od_adicion,oi_esferas:oi_esferas,oi_cilindros:oi_cilindros,oi_eje:oi_eje,oi_adicion:oi_adicion,
     tipo_lente:tipo_lente,color_varilla:color_varilla,color_frente:color_frente,imagen:imagen,validate:validate,categoria_lente:categoria_lente,
-    edad:edad,usuario:usuario,ocupacion:ocupacion,avsc:avsc,avfinal:avfinal,avsc_oi:avsc_oi,avfinal_oi:avfinal_oi,telefono:telefono,genero:genero,user:user,depto:depto,municipio:municipio,antiref:antiref,photochroma:photochroma,transit:transit,blueuv:blueuv,lente_man:lente_man},
+    edad:edad,usuario:usuario,ocupacion:ocupacion,avsc:avsc,avfinal:avfinal,avsc_oi:avsc_oi,avfinal_oi:avfinal_oi,telefono:telefono,genero:genero,user:user,depto:depto,municipio:municipio,antiref:antiref,photochroma:photochroma,transit:transit,blueuv:blueuv,lente_man:lente_man,montoAdd:montoAdd,descAdd:descAdd,pgx:pgx},
     cache: false,
     dataType:"json",
    
@@ -300,7 +302,7 @@ function alerts(alert){
 
 function verEditar(codigo,paciente){
   $("#validate").val("1");
-
+  document.getElementById("agregarServicio").disabled = true;
   let categoria = $("#get_categoria").val();
   document.getElementById("hist_orden").style.display = "block";
   if (categoria=='a') {
@@ -375,8 +377,13 @@ function verEditar(codigo,paciente){
        if(data.transition=="Si"){document.getElementById("transop").checked = true;}else{document.getElementById("transop").checked = false;}
 
        if(data.blueuv=="Si"){document.getElementById("blueop").checked = true;}else{document.getElementById("blueop").checked = false;}
+       if(data.pgx=="Si"){document.getElementById("pgx").checked = true;}else{document.getElementById("pgx").checked = false;}
 
        $("#lente_manual").val(data.lente_man);
+
+       $("#montoAdd").html(data.monto_extra);
+
+       $("#descAdd").html(data.concepto_extra);
 
 /*        let imagen = data.img;
        console.log(imagen);
@@ -425,7 +432,7 @@ $(document).on('click', '#order_new', function(){
   $('#munic_pac').trigger('change');
   $('#departamento_pac').val('1'); // Select the option with a value of '1'
   $('#departamento_pac').trigger('change');
-
+  document.getElementById("agregarServicio").disabled = false;
   document.getElementById("buscar_aro").style.display = "flex";
   document.getElementById("mostrar_imagen").style.display = "none";
   document.getElementById("hist_orden").style.display = "none";
@@ -442,6 +449,9 @@ $(document).on('click', '#order_new', function(){
     document.getElementById("photoop").checked = false;
     document.getElementById("transop").checked = false;
     document.getElementById("blueop").checked = false;
+
+    document.getElementById("montoAdd").innerHTML="";
+    document.getElementById("descAdd").innerHTML="";
    let checkboxs = document.getElementsByClassName("chk_element");
        for(j=0;j<checkboxs.length;j++){
       let id_chk = checkboxs[j].id;
@@ -1740,6 +1750,13 @@ function agregarServicio(){
 
 
 }
+
+const btn_extra = document.getElementById('agregarServicio');
+ btn_extra.addEventListener("click", () => {
+  $("#cantidad_extra").val("");
+  $("#cantidad_extra").focus();
+  $("#conceptoExtra").val("");
+});
 
 init();
 

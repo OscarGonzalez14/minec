@@ -83,6 +83,10 @@ $categoria_usuario = $_SESSION["categoria"];
            <th style="text-align: left;">Ojo derecho</th>
            <th>Ojo izquierdo</th>
            <th>Lente</th>
+           <th>Photo</th>
+           <th>BlueUv</th>
+           <th>Trans.</th>
+           <th>PGX</th>
            <th style="text-align: center">Detalles</th>
          </thead>
          <tbody class="style_th" style="padding: 3px;text-align: left;font-size: 11px"></tbody>
